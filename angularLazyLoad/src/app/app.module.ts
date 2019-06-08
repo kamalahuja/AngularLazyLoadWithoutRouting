@@ -4,13 +4,22 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import {EIQ603Module} from './eiq603/eiq603.module';
+import {EIQ604Module} from './eiq604/eiq604.module';
+import {EIQ605Module} from './eiq605/eiq605.module';
+import {EIQ606Module} from './eiq606/eiq606.module';
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    
+    EIQ603Module,
+    EIQ604Module,
+    EIQ605Module,
+    EIQ606Module
   ],
   providers: [],
   bootstrap: [AppComponent]
