@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "lazyModules": ["src/app/eiq606/eiq606.module"],
             "outputPath": "dist/angularLazyLoad",
             "index": "src/index.html",
             "main": "src/main.ts",

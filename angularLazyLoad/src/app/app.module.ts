@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule,SystemJsNgModuleLoader, NgModuleFactoryLoader  } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -7,10 +7,11 @@ import { AppComponent } from './app.component';
 import {EIQ603Module} from './eiq603/eiq603.module';
 import {EIQ604Module} from './eiq604/eiq604.module';
 import {EIQ605Module} from './eiq605/eiq605.module';
-import {EIQ606Module} from './eiq606/eiq606.module';
+import {LoadModuleDirective} from './lazy-module-directive';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoadModuleDirective
   ],
   imports: [
     BrowserModule,
@@ -19,9 +20,9 @@ import {EIQ606Module} from './eiq606/eiq606.module';
     EIQ603Module,
     EIQ604Module,
     EIQ605Module,
-    EIQ606Module
+    
   ],
-  providers: [],
+  providers: [{ provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
