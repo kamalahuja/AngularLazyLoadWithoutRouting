@@ -1,4 +1,4 @@
-import { Directive, Input, OnInit, ViewContainerRef, Injector, NgModuleRef, NgModuleFactoryLoader, Inject, NgModuleFactory } from '@angular/core';
+import { Directive, Input, OnInit, ViewContainerRef, Injector, NgModuleRef, NgModuleFactoryLoader, Inject, NgModuleFactory, Compiler } from '@angular/core';
 import {LAZY_MODULES, LAZY_MODULES_MAP} from './lazy-load-map';
 
 import { Type } from '@angular/core';
@@ -15,13 +15,23 @@ type ModuleWithRoot = Type<any> & { rootComponent: Type<any> };
       private vcr: ViewContainerRef,
       private injector: Injector,
       private loader: NgModuleFactoryLoader,
+      private compiler : Compiler,
       @Inject(LAZY_MODULES_MAP) private modulesMap
     ) { }
   
     ngOnInit() {
         console.log("directive ng init start");
-        let path = console.log(this.modulesMap['exhibitModule']);
-        this.loader
+        //let path = console.log(this.modulesMap['exhibitModule']);
+        import('src/app/eiq606/eiq606.module').then(m => m.EIQ606Module).then(eiq606Module => {
+            this.compiler.compileModuleAsync(eiq606Module).then(ngModuleFactory => {
+                this.moduleRef = ngModuleFactory.create(this.injector);
+                const factory = this.moduleRef.componentFactoryResolver.resolveComponentFactory(eiq606Module.rootComponent);
+                this.vcr.createComponent(factory);
+            })
+        });
+
+        
+       /*this.loader
           .load(this.modulesMap[this.moduleName])
           .then((moduleFactory: NgModuleFactory<any>) => {
             this.moduleRef = moduleFactory.create(this.injector);
@@ -33,7 +43,7 @@ type ModuleWithRoot = Type<any> & { rootComponent: Type<any> };
             );
             
             this.vcr.createComponent(factory);
-          });
+          });*/
           console.log("directive ng init end");
       }
   
