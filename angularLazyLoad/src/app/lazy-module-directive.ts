@@ -8,7 +8,8 @@ type ModuleWithRoot = Type<any> & { rootComponent: Type<any> };
   })
   
   export class LoadModuleDirective implements OnInit {
-    @Input('loadModule') moduleName: keyof LAZY_MODULES;
+    //@Input('loadModule') moduleName: keyof LAZY_MODULES;
+    @Input('loadModule') moduleName: string;
     private moduleRef: NgModuleRef<any>;
   
     constructor(
@@ -22,13 +23,26 @@ type ModuleWithRoot = Type<any> & { rootComponent: Type<any> };
     ngOnInit() {
         console.log("directive ng init start");
         //let path = console.log(this.modulesMap['exhibitModule']);
-        import('src/app/eiq606/eiq606.module').then(m => m.EIQ606Module).then(eiq606Module => {
-            this.compiler.compileModuleAsync(eiq606Module).then(ngModuleFactory => {
-                this.moduleRef = ngModuleFactory.create(this.injector);
-                const factory = this.moduleRef.componentFactoryResolver.resolveComponentFactory(eiq606Module.rootComponent);
-                this.vcr.createComponent(factory);
-            })
-        });
+        if(this.moduleName == 'EIQ606'){
+            import('src/app/eiq606/eiq606.module').then(m => m.EIQ606Module).then(eiq606Module => {
+                this.compiler.compileModuleAsync(eiq606Module).then(ngModuleFactory => {
+                    this.moduleRef = ngModuleFactory.create(this.injector);
+                    const factory = this.moduleRef.componentFactoryResolver.resolveComponentFactory(eiq606Module.rootComponent);
+                    this.vcr.createComponent(factory);
+                })
+            });
+        }
+
+        if(this.moduleName == 'EIQ607'){
+            import('src/app/eiq607/eiq607.module').then(m => m.EIQ607Module).then(eiq607Module => {
+                this.compiler.compileModuleAsync(eiq607Module).then(ngModuleFactory => {
+                    this.moduleRef = ngModuleFactory.create(this.injector);
+                    const factory = this.moduleRef.componentFactoryResolver.resolveComponentFactory(eiq607Module.rootComponent);
+                    this.vcr.createComponent(factory);
+                })
+            });
+        }
+        
 
         
        /*this.loader
