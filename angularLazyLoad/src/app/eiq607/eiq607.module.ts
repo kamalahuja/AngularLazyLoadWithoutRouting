@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component, Pipe, Directive } from '../exports-constants';
 import { CommonModule } from '@angular/common';
 import {EIQ607Component} from './eiq607.component';
 @NgModule({

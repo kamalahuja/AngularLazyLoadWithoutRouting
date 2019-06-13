@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Pipe, Directive } from '../exports-constants';
 
 @Component({
   selector: 'eiq607-component',
-  templateUrl: './eiq607.component.html',
-  styleUrls: ['./eiq607.component.scss']
+  template: `Hello I am EIQ607`,
+  
+  jit : true
 })
 export class EIQ607Component {
   
