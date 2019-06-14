@@ -19,7 +19,7 @@ import {LoadModuleDirective} from './lazy-module-directive';
     
     EIQ603Module,
     EIQ604Module,
-    EIQ605Module,
+    
     
   ],
   providers: [{ provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }],

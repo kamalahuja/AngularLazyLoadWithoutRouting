@@ -42,6 +42,16 @@ type ModuleWithRoot = Type<any> & { rootComponent: Type<any> };
                 })
             });
         }
+
+        if(this.moduleName == 'EIQ605'){
+          import('src/app/eiq605/eiq605.module').then(m => m.EIQ605Module).then(eiq605Module => {
+              this.compiler.compileModuleAsync(eiq605Module).then(ngModuleFactory => {
+                  this.moduleRef = ngModuleFactory.create(this.injector);
+                  const factory = this.moduleRef.componentFactoryResolver.resolveComponentFactory(eiq605Module.rootComponent);
+                  this.vcr.createComponent(factory);
+              })
+          });
+      }
         
 
         

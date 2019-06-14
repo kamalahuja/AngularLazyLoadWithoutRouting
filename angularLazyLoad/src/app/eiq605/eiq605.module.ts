@@ -6,6 +6,8 @@ import {EIQ605Component} from './eiq605.component';
   imports: [
     CommonModule
   ],
-  exports :[EIQ605Component]
+  exports :[EIQ605Module.rootComponent]
 })
-export class EIQ605Module { }
+export class EIQ605Module { 
+  static rootComponent = EIQ605Component;
+}
